@@ -20,11 +20,6 @@ brew "tmux"        # Terminal multiplexer
 # =============================================================================
 brew "nvm"         # Node.js version manager
 brew "uv"          # Python package manager / version manager
-brew "rbenv"       # Ruby version manager
-brew "ruby-build"  # Builds Ruby versions for rbenv
-brew "ruby"        # Ruby
-brew "ruby@3.0"    # Ruby 3.0 (pinned)
-brew "python-yq"   # CLI YAML/XML processor (Python wrapper around jq)
 
 # =============================================================================
 # Build tools
