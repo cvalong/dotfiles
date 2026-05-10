@@ -27,6 +27,8 @@ detect_os() {
 }
 
 # Replace $dst with a symlink to $src. Backs up any existing non-matching target.
+# Creates the parent directory of $dst if needed (so XDG paths like
+# ~/.config/tmux/tmux.conf work on a fresh machine).
 symlink_safe() {
     local src="$1" dst="$2"
 
@@ -41,6 +43,7 @@ symlink_safe() {
         mv "$dst" "$backup"
     fi
 
+    mkdir -p "$(dirname "$dst")"
     ln -sfn "$src" "$dst"
     log "link  $dst -> $src"
 }
@@ -99,6 +102,14 @@ install_shell_files() {
     symlink_safe "$DOTFILES_DIR/zshenv"   "$HOME/.zshenv"
 }
 
+# XDG-style configs live under config/<tool>/ in the repo and symlink into
+# ~/.config/<tool>/. New tools (nvim, ghostty, etc.) drop in the same way.
+install_xdg_configs() {
+    local xdg_home="${XDG_CONFIG_HOME:-$HOME/.config}"
+    symlink_safe "$DOTFILES_DIR/config/tmux/tmux.conf"           "$xdg_home/tmux/tmux.conf"
+    symlink_safe "$DOTFILES_DIR/config/aerospace/aerospace.toml" "$xdg_home/aerospace/aerospace.toml"
+}
+
 main() {
     local os
     os="$(detect_os)"
@@ -110,11 +121,13 @@ main() {
     case "$os" in
         mac)
             install_shell_files
+            install_xdg_configs
             ;;
         wsl|linux)
             warn "WSL/Linux path stubbed for Phase 1. Mac is the primary target."
             warn "TODO: install apt packages, decide which shell files apply."
             install_shell_files
+            install_xdg_configs
             ;;
         *)
             warn "unsupported OS: $(uname -s). skipping shell-file install."

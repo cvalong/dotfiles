@@ -15,6 +15,7 @@ After install, edit `~/.gitconfig` and fill in your name and email.
 
 - Symlinks `~/.dotfiles` to wherever you cloned the repo
 - Symlinks `~/.zshrc`, `~/.bashrc`, `~/.zprofile`, `~/.zshenv` to the committed shell files (existing files backed up to `~/.<name>.backup-<timestamp>`)
+- Symlinks XDG-style configs from `config/<tool>/` into `$XDG_CONFIG_HOME/<tool>/` (defaults to `~/.config/<tool>/`); currently `tmux` and `aerospace`
 - Sets up `~/.gitconfig` with three-case logic:
   - missing → copies from template, prompts you to fill in identity
   - already references the dotfiles include → no-op
@@ -34,6 +35,7 @@ Most edits don't require re-running `install.sh` — symlinks mean every change 
 | Add a new file under `personal/*.sh` | `exec zsh` — the glob picks it up |
 | Edit `Brewfile` | `brew bundle install --file=~/.dotfiles/Brewfile` (add `--cleanup --force` to also uninstall removed entries) |
 | Add a new top-level config file (e.g. `tmux.conf`) | edit `install.sh` to add a `symlink_safe` call, then re-run it |
+| Add a new XDG config (e.g. `config/nvim/init.lua`) | drop the file under `config/<tool>/`, add a line to `install_xdg_configs` in `install.sh`, then re-run it |
 
 The mental model: **`install.sh` is for structural changes** (the set of symlinks the installer manages). **Content changes are immediate** — just reload.
 
@@ -65,6 +67,11 @@ dotfiles/
 ├── zprofile            # symlinked to ~/.zprofile
 ├── zshenv              # symlinked to ~/.zshenv
 ├── Brewfile            # `brew bundle install` packages
+├── config/             # XDG-style configs, mirrors ~/.config/
+│   ├── tmux/
+│   │   └── tmux.conf             # symlinked to ~/.config/tmux/tmux.conf
+│   └── aerospace/
+│       └── aerospace.toml        # symlinked to ~/.config/aerospace/aerospace.toml
 └── personal/
     ├── .gitconfig                    # universal git preferences (no identity)
     ├── gitconfig.local.template      # template copied to ~/.gitconfig on first install
@@ -82,7 +89,7 @@ dotfiles/
 
 - [ ] Phase 1.5 — SSH commit signing (`gpg.format=ssh`)
 - [ ] Phase 2 — wire `brew bundle install` into `install.sh`; capture editor settings/extensions
-- [ ] Phase 3 — capture `~/.config/{nvim,ghostty}`, `.tmux.conf`, `.ssh/config`
+- [x] Phase 3 (partial) — XDG configs for `tmux` and `aerospace` captured. Still TODO: `~/.config/{nvim,ghostty}`, `.ssh/config`
 - [ ] Phase 4 — Codespaces / devcontainer integration
 - [ ] Phase 5 — Windows / WSL support (chezmoi for cross-OS templating if needed)
 

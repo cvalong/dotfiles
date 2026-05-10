@@ -2,6 +2,7 @@
 # Taps
 # =============================================================================
 tap "atlassian/acli"
+tap "nikitabobko/tap"
 tap "shopify/shopify"
 
 # =============================================================================
@@ -64,6 +65,7 @@ brew "shopify/shopify/shopify-cli"  # Shopify platform CLI
 # =============================================================================
 # Casks (GUI applications)
 # =============================================================================
-cask "mullvad-vpn" # VPN client
-cask "raycast"     # Launcher / hotkeys
-cask "wezterm"     # GPU-accelerated terminal
+cask "nikitabobko/tap/aerospace" # Tiling window manager (i3-style, no SIP disable)
+cask "mullvad-vpn"               # VPN client
+cask "raycast"                   # Launcher / hotkeys
+cask "wezterm"                   # GPU-accelerated terminal
