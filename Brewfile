@@ -59,8 +59,6 @@ brew "opentofu"
 brew "pango"
 # Object-relational database system
 brew "postgresql@14"
-# Python version management
-brew "pyenv"
 # Command-line YAML and XML processor that wraps jq
 brew "python-yq"
 # Install various Ruby versions and implementations
