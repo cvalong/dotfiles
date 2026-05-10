@@ -1,95 +1,74 @@
+# =============================================================================
+# Taps
+# =============================================================================
 tap "atlassian/acli"
-tap "homebrew/services"
-tap "mongodb/brew"
-tap "playcover/playcover"
 tap "shopify/shopify"
-# Core application library for C
-brew "glib"
-# Cross-platform make
-brew "cmake"
-# GNU multiple precision arithmetic library
-brew "gmp"
-# GNU File, Shell, and Text utilities
-brew "coreutils"
-# General-purpose data compression with high compression ratio
-brew "xz"
-# Load/unload environment variables based on $PWD
-brew "direnv"
-# Pack, ship and run any application as a lightweight container
-brew "docker"
-# Cryptography and SSL/TLS Toolkit
-brew "openssl@3"
-# Play, record, convert, and stream select audio and video codecs
-brew "ffmpeg"
-# Fast web fuzzer written in Go
-brew "ffuf"
-# Toolkit for image loading and pixel buffer manipulation
-brew "gdk-pixbuf"
-# GitHub command-line tool
-brew "gh"
-# Distributed revision control system
-brew "git"
-# Git extension for versioning large files
-brew "git-lfs"
-# Generate introspection data for GObject libraries
-brew "gobject-introspection"
-# Database migrations CLI tool
-brew "golang-migrate"
-# Lightweight and flexible command-line JSON processor
-brew "jq"
-# Tool to move from `docker-compose` to Kubernetes
-brew "kompose"
-# Lazier way to manage everything docker
-brew "lazydocker"
-# YAML Parser
-brew "libyaml"
-# Open-source, cross-platform JavaScript runtime environment
-brew "node"
-# MongoDB Shell to connect, configure, query, and work with your MongoDB database
-brew "mongosh"
-# Port scanning utility for large networks
-brew "nmap"
-# Manage multiple Node.js versions
-brew "nvm"
-# Create, run, and share large language models (LLMs)
-brew "ollama"
-# Drop-in replacement for Terraform. Infrastructure as Code Tool
-brew "opentofu"
-# Framework for layout and rendering of i18n text
-brew "pango"
-# Object-relational database system
-brew "postgresql@14"
-# Command-line YAML and XML processor that wraps jq
-brew "python-yq"
-# Install various Ruby versions and implementations
-brew "ruby-build"
-# Ruby version manager
-brew "rbenv"
-# Powerful, clean, object-oriented scripting language
-brew "ruby"
-# Powerful, clean, object-oriented scripting language
-brew "ruby@3.0"
-# Extremely fast Python linter, written in Rust
-brew "ruff"
-# Tool Command Language
-brew "tcl-tk"
-# Terminal multiplexer
-brew "tmux"
-# Extremely fast Python package installer and resolver, written in Rust
-brew "uv"
-# Feature-rich command-line audio/video downloader
-brew "yt-dlp"
-# General-purpose lossless data-compression library
-brew "zlib"
-# Software to interact with Atlassian Cloud from the terminal
-brew "atlassian/acli/acli"
-# High-performance, schema-free, document-oriented database
-brew "mongodb/brew/mongodb-community"
-# A CLI tool to build for the Shopify platform
-brew "shopify/shopify/shopify-cli"
-# VPN client
-cask "mullvad-vpn"
-# Control your tools with a few keystrokes
-cask "raycast"
-# GPU-accelerated cross-platform terminal emulator and multiplexer
-cask "wezterm"
+
+# =============================================================================
+# Core CLI & shell utilities
+# =============================================================================
+brew "coreutils"   # GNU file, shell, and text utilities (gdate, greadlink, etc.)
+brew "direnv"      # Per-directory environment variables
+brew "gh"          # GitHub CLI
+brew "git"         # Distributed revision control
+brew "git-lfs"     # Git extension for large files
+brew "jq"          # Command-line JSON processor
+brew "tmux"        # Terminal multiplexer
+
+# =============================================================================
+# Languages & runtimes
+# =============================================================================
+brew "nvm"         # Node.js version manager
+brew "uv"          # Python package manager / version manager
+brew "rbenv"       # Ruby version manager
+brew "ruby-build"  # Builds Ruby versions for rbenv
+brew "ruby"        # Ruby
+brew "ruby@3.0"    # Ruby 3.0 (pinned)
+brew "python-yq"   # CLI YAML/XML processor (Python wrapper around jq)
+
+# =============================================================================
+# Build tools
+# =============================================================================
+brew "cmake"       # Cross-platform make
+
+# =============================================================================
+# Containers & infrastructure
+# =============================================================================
+brew "docker"      # Container runtime
+brew "lazydocker"  # TUI for docker
+brew "opentofu"    # Infrastructure as Code (Terraform fork)
+
+# =============================================================================
+# Linters & formatters
+# =============================================================================
+brew "ruff"        # Python linter / formatter
+
+# =============================================================================
+# Media
+# =============================================================================
+brew "ffmpeg"      # Audio/video codec processor
+brew "yt-dlp"      # Audio/video downloader
+
+# =============================================================================
+# Security tooling
+# =============================================================================
+brew "ffuf"        # Web fuzzer
+brew "nmap"        # Port scanner
+
+# =============================================================================
+# AI / ML
+# =============================================================================
+brew "ollama"      # Run LLMs locally
+
+# =============================================================================
+# Vendor CLIs
+# =============================================================================
+brew "atlassian/acli/acli"          # Atlassian Cloud CLI
+brew "shopify/shopify/shopify-cli"  # Shopify platform CLI
+
+# =============================================================================
+# Casks (GUI applications)
+# =============================================================================
+cask "mullvad-vpn" # VPN client
+cask "raycast"     # Launcher / hotkeys
+cask "wezterm"     # GPU-accelerated terminal
