@@ -23,6 +23,38 @@ After install, edit `~/.gitconfig` and fill in your name and email.
 
 The script never overwrites your `~/.gitconfig` once it has identity in it. Re-running on an existing machine is safe.
 
+## Day-to-day usage
+
+Most edits don't require re-running `install.sh` — symlinks mean every change is immediately live. Just reload your shell.
+
+| Change | What to run |
+|---|---|
+| Edit a symlinked file (`zshrc`, `personal/functions.sh`, etc.) | `exec zsh` (or open a new tab) |
+| Edit `personal/.gitconfig` | nothing — git reads it on every invocation |
+| Add a new file under `personal/*.sh` | `exec zsh` — the glob picks it up |
+| Edit `Brewfile` | `brew bundle install --file=~/.dotfiles/Brewfile` (add `--cleanup --force` to also uninstall removed entries) |
+| Add a new top-level config file (e.g. `tmux.conf`) | edit `install.sh` to add a `symlink_safe` call, then re-run it |
+
+The mental model: **`install.sh` is for structural changes** (the set of symlinks the installer manages). **Content changes are immediate** — just reload.
+
+### Syncing across machines
+
+```bash
+cd ~/.dotfiles
+git pull
+brew bundle install --file=Brewfile   # if Brewfile changed
+exec zsh                              # if any shell file changed
+~/.dotfiles/install.sh                # only if install.sh / file set changed
+```
+
+### Iterating on a single file
+
+```bash
+$EDITOR ~/.dotfiles/personal/functions.sh
+source ~/.dotfiles/personal/functions.sh   # reload just this file
+# test in current shell, commit when satisfied
+```
+
 ## Layout
 
 ```
@@ -36,8 +68,7 @@ dotfiles/
 └── personal/
     ├── .gitconfig                    # universal git preferences (no identity)
     ├── gitconfig.local.template      # template copied to ~/.gitconfig on first install
-    ├── functions.sh                  # `rebase_onto`, `delete_merged_branches`
-    └── aliases.sh
+    └── functions.sh                  # `rebase_onto`, `delete_merged_branches`
 ```
 
 ## Design principles
